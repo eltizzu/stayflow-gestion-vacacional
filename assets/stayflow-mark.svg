@@ -1,0 +1,9 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">StayFlow</title>
+  <desc id="desc">Isotipo de StayFlow</desc>
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="#DFF5EB"/>
+  <path d="M32 61L64 33L96 61" stroke="#10251D" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M42 58V92H86V58" stroke="#10251D" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M32 84C45 99 78 101 95 75C102 64 94 50 77 57C62 63 64 80 45 77C31 75 28 61 39 51" stroke="#167C5B" stroke-width="12" stroke-linecap="round"/>
+  <path d="M91 35L101 45L118 25" stroke="#167C5B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
