@@ -1,6 +1,6 @@
 # StayFlow - Checklist Final Del Producto
 
-Ultima actualizacion: 2026-05-14
+Ultima actualizacion: 2026-05-21
 
 ## Regla de mantenimiento
 
@@ -32,11 +32,21 @@ Este checklist debe actualizarse cada vez que se anada una pantalla, flujo, modu
 - [x] Reporte simple para propietario.
 - [x] Guion base de video demo.
 - [x] Configuracion basica creada.
+- [x] Vista Presentacion para llamadas con clientes.
+- [x] Pricing provisional para validar interes.
+- [x] Kit de preguntas discovery para gestores reales.
+- [x] Caso demo Malaga con cliente ficticio CostaSur.
+- [x] Documento comercial de por que elegir StayFlow.
+- [x] Landing comercial estatica creada.
+- [x] Enlace desde demo hacia web comercial.
+- [x] Estructura publica con `index.html` como landing y `demo.html` como demo.
+- [x] Aviso visible de datos ficticios dentro de la demo publica.
+- [x] Guia de publicacion web creada.
 - [ ] Login o acceso por perfiles reales.
 - [ ] Persistencia real de datos.
 - [x] Persistencia local temporal para demo.
 - [ ] Traduccion ES/EN.
-- [ ] Landing comercial.
+- [x] Landing comercial.
 - [ ] Textos legales web.
 
 ## Revision de pantallas
@@ -137,16 +147,21 @@ Este checklist debe actualizarse cada vez que se anada una pantalla, flujo, modu
 - [x] Paleta sobria y profesional.
 - [ ] Revisar contraste final.
 - [ ] Revisar tipografias y espaciados finos.
+- [x] Foco visible y hover basico de botones.
+- [x] Barra superior optimizada para ancho movil.
 - [ ] Anadir iconos cuando convenga.
 - [ ] Evitar que la demo parezca una plantilla generica.
 
 ## Presentacion final
 
 - [x] Preparar guion de demo de 3 minutos.
-- [ ] Preparar ejemplo de cliente pequeno de Malaga.
-- [ ] Preparar propuesta comercial PDF o pagina.
-- [ ] Preparar pricing provisional.
-- [ ] Preparar lista de preguntas para discovery con gestores reales.
+- [x] Preparar ejemplo de cliente pequeno de Malaga.
+- [x] Preparar propuesta comercial dentro de la demo.
+- [x] Preparar pricing provisional.
+- [x] Preparar lista de preguntas para discovery con gestores reales.
+- [x] Preparar documento de argumentos comerciales y diferenciacion.
+- [x] Preparar landing comercial estatica.
+- [ ] Preparar propuesta comercial PDF externa si un cliente la pide.
 
 ## Pendientes tecnicos importantes
 

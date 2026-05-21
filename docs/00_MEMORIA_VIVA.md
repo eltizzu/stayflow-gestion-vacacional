@@ -1,6 +1,6 @@
 # StayFlow - Memoria Viva Del Proyecto
 
-Ultima actualizacion: 2026-05-14
+Ultima actualizacion: 2026-05-21
 
 ## Objetivo
 
@@ -28,6 +28,10 @@ Si una decision cambia el producto, tambien debe cambiar la documentacion corres
 - `05_QUE_DEBERIA_DECIR_LA_WEB_LEGALMENTE.md`: textos y paginas legales de la web.
 - `06_ECOSISTEMA_E_IDEAS_FUTURAS.md`: limites del producto actual e ideas futuras.
 - `07_GUION_VIDEO_DEMO.md`: guion base para grabar video explicativo.
+- `08_DISCOVERY_CLIENTES.md`: preguntas y guion practico para probar StayFlow con gestores reales.
+- `09_CASO_DEMO_MALAGA.md`: caso ficticio CostaSur para presentar la demo con una historia concreta.
+- `10_POR_QUE_ELEGIR_STAYFLOW.md`: documento comercial de argumentos, problemas, comodidades y diferenciacion.
+- `11_PUBLICACION_WEB.md`: guia de archivos y comprobaciones para publicar StayFlow como sitio estatico.
 
 ## Decisiones tomadas hasta ahora
 
@@ -53,6 +57,14 @@ Si una decision cambia el producto, tambien debe cambiar la documentacion corres
 - Propiedades ampliadas el 2026-05-16: direccion, capacidad, propietario, codigo de llave y responsable habitual.
 - Perfiles simulados agregados el 2026-05-16: Coordinador, Limpieza, Recepcion, Mantenimiento y Propietario, con navegacion y enfoque de demo adaptados.
 - Reporte de propietario agregado el 2026-05-16: resumen por propietario con viviendas, listas, ocupadas, avisos, proximos movimientos y detalle no operativo.
+- Vista Presentacion agregada el 2026-05-20: propuesta comercial, cliente inicial, pricing provisional, preguntas de discovery y aviso de no usar datos reales.
+- Kit de discovery para clientes creado el 2026-05-20 en `08_DISCOVERY_CLIENTES.md`.
+- Caso demo CostaSur agregado el 2026-05-21: gestora ficticia de Malaga con 14 viviendas, 4 roles operativos y piloto sugerido de 7 dias.
+- Documento comercial "Por Que Elegir StayFlow" agregado el 2026-05-21 para explicar problemas, comodidades y diferenciacion frente a WhatsApp, hojas, PMS y apps genericas.
+- Landing comercial estatica agregada el 2026-05-21 en `landing.html`, enlazada desde la demo y construida a partir de la propuesta comercial.
+- Pulido visual inicial agregado el 2026-05-21: foco visible, hover de botones, mejor comportamiento movil de acciones superiores y pagina comercial responsive.
+- Estructura publica preparada el 2026-05-21: `index.html` pasa a ser landing publica, `demo.html` contiene la demo interactiva y se agrega aviso visible de datos ficticios.
+- Guia de publicacion web creada el 2026-05-21 en `11_PUBLICACION_WEB.md`.
 
 ## Recordatorio para proximos avances
 

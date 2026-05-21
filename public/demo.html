@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StayFlow Demo | Operativa diaria</title>
+    <meta
+      name="description"
+      content="Demo interactiva de StayFlow con datos ficticios para probar la operativa diaria de alquiler vacacional."
+    />
+    <link rel="icon" type="image/svg+xml" href="assets/stayflow-mark.svg" />
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegacion principal">
+        <div class="brand">
+          <img class="brand-logo" src="assets/stayflow-logo.svg" alt="StayFlow" />
+          <span>Gestión vacacional</span>
+        </div>
+
+        <nav class="nav-list">
+          <a class="nav-item active" href="#dashboard">Hoy</a>
+          <a class="nav-item" href="#presentacion">Presentación</a>
+          <a class="nav-item" href="#agenda">Agenda</a>
+          <a class="nav-item" href="#propiedades">Propiedades</a>
+          <a class="nav-item" href="#tareas">Tareas</a>
+          <a class="nav-item" href="#equipo">Equipo</a>
+          <a class="nav-item" href="#movil">Móvil</a>
+          <a class="nav-item" href="#incidencias">Incidencias</a>
+          <a class="nav-item" href="#configuracion">Configuración</a>
+        </nav>
+
+        <div class="sidebar-note">
+          <span>Caso demo Málaga</span>
+          <strong>CostaSur · 14 viviendas</strong>
+          <small>Gestora local con limpieza, recepción y mantenimiento coordinados por WhatsApp.</small>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Panel operativo</p>
+            <h1 id="pageTitle">Hoy en StayFlow</h1>
+            <p class="subcopy" id="pageSubcopy">Entradas, salidas, limpiezas e incidencias en una sola vista.</p>
+          </div>
+          <div class="topbar-actions">
+            <label class="profile-select">
+              Perfil
+              <select id="activeProfileSelect" aria-label="Perfil activo de demo"></select>
+            </label>
+            <button class="icon-button" type="button" id="languageButton" aria-label="Cambiar idioma" title="Cambiar idioma">ES</button>
+            <button class="ghost-button" type="button" id="resetDemo">Restaurar demo</button>
+            <button class="ghost-button" type="button" id="startGuidedDemo">Demo guiada</button>
+            <a class="ghost-button link-button" href="index.html">Web comercial</a>
+            <button class="primary-button" type="button" id="openTaskModal">Nueva tarea</button>
+          </div>
+        </header>
+
+        <section class="public-demo-warning" aria-label="Aviso de demo publica">
+          <div>
+            <strong>Demo pública con datos ficticios</strong>
+            <span>Prueba libremente los flujos, pero no introduzcas datos reales de huéspedes, propietarios o viviendas.</span>
+          </div>
+          <a class="ghost-button link-button" href="index.html">Volver a la web</a>
+        </section>
+
+        <section class="profile-demo view-section" data-view="dashboard" aria-label="Perfil activo">
+          <div>
+            <p class="eyebrow" id="profileModeLabel">Modo demo</p>
+            <h2 id="profileModeTitle">Coordinación operativa</h2>
+            <p id="profileModeCopy">Vista completa para revisar el día, asignar responsables y cerrar riesgos.</p>
+          </div>
+          <div class="profile-actions" id="profileQuickActions"></div>
+        </section>
+
+        <section class="summary-grid view-section" data-view="dashboard" aria-label="Resumen del dia">
+          <article class="metric-card">
+            <span>Entradas</span>
+            <strong>6</strong>
+            <small>3 antes de las 16:00</small>
+          </article>
+          <article class="metric-card">
+            <span>Salidas</span>
+            <strong>5</strong>
+            <small>2 limpiezas urgentes</small>
+          </article>
+          <article class="metric-card">
+            <span>Limpiezas</span>
+            <strong>8</strong>
+            <small>5 asignadas, 3 pendientes</small>
+          </article>
+          <article class="metric-card warning">
+            <span>Riesgos</span>
+            <strong>3</strong>
+            <small>Revisar antes del check-in</small>
+          </article>
+        </section>
+
+        <section class="global-filters view-section" data-view="dashboard" aria-label="Filtros globales">
+          <div>
+            <p class="eyebrow">Filtros</p>
+            <h2>Enfocar la operativa</h2>
+          </div>
+          <label>
+            Estado
+            <select id="globalStatusFilter">
+              <option value="Todas">Todas</option>
+            </select>
+          </label>
+          <label>
+            Responsable
+            <select id="globalOwnerFilter">
+              <option value="Todos">Todos</option>
+            </select>
+          </label>
+          <label>
+            Zona
+            <select id="globalZoneFilter">
+              <option value="Todas">Todas</option>
+            </select>
+          </label>
+          <div class="filter-result">
+            <strong id="filterResultCount">0</strong>
+            <span>viviendas visibles</span>
+          </div>
+          <button class="ghost-button" type="button" id="clearFilters">Limpiar</button>
+        </section>
+
+        <section class="work-area view-section" data-view="dashboard">
+          <div class="panel today-panel" id="dashboard">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Prioridad</p>
+                <h2>Lo importante de hoy</h2>
+              </div>
+              <a class="ghost-button link-button" href="#agenda">Ver agenda</a>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item urgent">
+                <time>11:00</time>
+                <div>
+                  <strong>Salida en Soho Loft 2B</strong>
+                  <span>Limpieza sin responsable asignado. Entrada nueva a las 15:30.</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <time>13:30</time>
+                <div>
+                  <strong>Recepción en Centro Histórico A1</strong>
+                  <span>Responsable: Lucía. Huésped solicita cuna.</span>
+                </div>
+              </div>
+              <div class="timeline-item issue">
+                <time>14:00</time>
+                <div>
+                  <strong>Incidencia en Malagueta Sea View</strong>
+                  <span>Aire acondicionado reportado. Técnico pendiente de confirmar.</span>
+                </div>
+              </div>
+              <div class="timeline-item done">
+                <time>15:00</time>
+                <div>
+                  <strong>Limpieza completada en Pedregalejo Casa</strong>
+                  <span>Fotos recibidas. Vivienda marcada como lista.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel mobile-preview" id="vista-movil">
+            <div class="phone-frame">
+              <div class="phone-header">
+                <span>Mis tareas</span>
+                <strong>Maria</strong>
+              </div>
+              <div class="mobile-task active">
+                <small>Ahora</small>
+                <strong>Limpiar Soho Loft 2B</strong>
+                <span>Entrada 15:30</span>
+                <button type="button" id="mobileStartTask">Iniciar</button>
+              </div>
+              <div class="mobile-task">
+                <small>Después</small>
+                <strong>Revisar Centro Histórico A1</strong>
+                <span>Check-in 17:00</span>
+              </div>
+              <div class="mobile-task">
+                <small>Incidencia</small>
+                <strong>Enviar foto del termo</strong>
+                <span>Teatinos Studio</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="presentation-section view-section" id="presentacion" data-view="presentacion" hidden>
+          <div class="sales-hero">
+            <div>
+              <p class="eyebrow">Caso demo: CostaSur Gestión Vacacional</p>
+              <h2>Un panel diario para que 14 viviendas no dependan de WhatsApp.</h2>
+              <p>
+                CostaSur gestiona viviendas en Málaga centro, Soho, Malagueta, Huelin y Pedregalejo. El problema
+                no son las reservas: es saber qué vivienda está lista, quién va, qué falta y qué puede fallar antes del check-in.
+              </p>
+            </div>
+            <div class="sales-hero-card" aria-label="Resumen comercial">
+              <span>Cliente ideal inicial</span>
+              <strong>5 a 25 viviendas</strong>
+              <small>Equipos pequeños que todavía coordinan tareas, llaves, fotos e incidencias por mensajes.</small>
+            </div>
+          </div>
+
+          <div class="case-strip" aria-label="Resumen del caso demo">
+            <article>
+              <span>Viviendas</span>
+              <strong>14</strong>
+              <small>6 visibles como muestra operativa.</small>
+            </article>
+            <article>
+              <span>Equipo</span>
+              <strong>4 roles</strong>
+              <small>Coordinación, limpieza, recepción y mantenimiento.</small>
+            </article>
+            <article>
+              <span>Dolor principal</span>
+              <strong>Check-in sin margen</strong>
+              <small>Limpieza, llaves y fotos se confirman tarde.</small>
+            </article>
+            <article>
+              <span>Piloto sugerido</span>
+              <strong>7 días</strong>
+              <small>Una cartera pequeña con datos ficticios o controlados.</small>
+            </article>
+          </div>
+
+          <div class="sales-grid">
+            <article class="sales-panel">
+              <p class="eyebrow">Problema</p>
+              <h3>Demasiada coordinación dispersa</h3>
+              <p>Limpiezas, llaves, entradas, incidencias y fotos se pierden entre llamadas, notas y mensajes.</p>
+            </article>
+            <article class="sales-panel">
+              <p class="eyebrow">Propuesta</p>
+              <h3>Control del día en una vista</h3>
+              <p>El coordinador ve qué pasa hoy, quién lo hace y qué puede fallar antes de que llegue el huésped.</p>
+            </article>
+            <article class="sales-panel">
+              <p class="eyebrow">Diferencia</p>
+              <h3>Más simple que un PMS</h3>
+              <p>No intenta reemplazar reservas o revenue: ordena la ejecución diaria que suele quedar fuera.</p>
+            </article>
+          </div>
+
+          <div class="sales-columns">
+            <section class="sales-panel">
+              <div class="sales-panel-head">
+                <p class="eyebrow">Pricing provisional</p>
+                <h3>Para validar interés</h3>
+              </div>
+              <div class="price-list">
+                <article>
+                  <span>Starter</span>
+                  <strong>49 €/mes</strong>
+                  <small>Hasta 10 viviendas. Panel, tareas, equipo e incidencias.</small>
+                </article>
+                <article>
+                  <span>Pro</span>
+                  <strong>89 €/mes</strong>
+                  <small>Hasta 25 viviendas. Perfiles, reportes y configuración avanzada.</small>
+                </article>
+                <article>
+                  <span>Operaciones</span>
+                  <strong>A medida</strong>
+                  <small>Equipos con más volumen, integraciones o necesidades específicas.</small>
+                </article>
+              </div>
+            </section>
+
+            <section class="sales-panel">
+              <div class="sales-panel-head">
+                <p class="eyebrow">Discovery</p>
+                <h3>Preguntas para la llamada</h3>
+              </div>
+              <ol class="question-list">
+                <li>¿Cuántas viviendas gestionáis ahora y cuántas personas coordinan la operativa?</li>
+                <li>¿Dónde se os pierden más cosas: limpiezas, llaves, check-ins, incidencias o fotos?</li>
+                <li>¿Qué tendría que mostrar StayFlow para que lo probarais una semana con datos reales?</li>
+              </ol>
+            </section>
+          </div>
+
+          <div class="sales-footer">
+            <strong>Estado de demo:</strong>
+            <span>Producto estático interactivo para validación comercial. No usar aún con datos personales reales de huéspedes.</span>
+          </div>
+        </section>
+
+        <section class="agenda-section view-section" id="agenda" data-view="agenda" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Agenda</p>
+              <h2>El día ordenado por horas</h2>
+            </div>
+            <div class="agenda-summary" id="agendaSummary"></div>
+          </div>
+          <div class="agenda-list" id="agendaList"></div>
+        </section>
+
+        <section class="property-section view-section" id="propiedades" data-view="propiedades" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Propiedades</p>
+              <h2>Estado real de cada vivienda</h2>
+            </div>
+            <div class="filters" role="list" aria-label="Filtros de estado">
+              <button class="filter active" type="button" data-filter="Todas">Todas</button>
+              <button class="filter" type="button" data-filter="Por Entrar">Por entrar</button>
+              <button class="filter" type="button" data-filter="En Limpieza">En limpieza</button>
+              <button class="filter" type="button" data-filter="Incidencia">Incidencia</button>
+            </div>
+          </div>
+
+          <div class="owner-report" id="ownerReport" hidden></div>
+
+          <div class="property-layout">
+            <div class="property-grid" id="propertyGrid"></div>
+            <aside class="property-detail" id="propertyDetail" aria-label="Detalle de propiedad"></aside>
+          </div>
+        </section>
+
+        <section class="board-section view-section" id="tareas" data-view="tareas" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Tareas</p>
+              <h2>Tablero operativo</h2>
+            </div>
+          </div>
+          <div class="task-board" id="taskBoard"></div>
+        </section>
+
+        <section class="team-section view-section" id="equipo" data-view="equipo" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Equipo</p>
+              <h2>Responsables del día</h2>
+            </div>
+            <div class="team-tabs" id="teamTabs" aria-label="Responsables"></div>
+          </div>
+          <div class="team-layout">
+            <div class="team-grid" id="teamGrid"></div>
+            <aside class="member-panel" id="memberPanel" aria-label="Tareas del responsable"></aside>
+          </div>
+        </section>
+
+        <section class="mobile-work-section view-section" id="movil" data-view="movil" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Móvil</p>
+              <h2>Mis tareas en campo</h2>
+            </div>
+            <div class="team-tabs" id="mobileWorkerTabs" aria-label="Responsables móvil"></div>
+          </div>
+          <div class="mobile-work-layout">
+            <div class="mobile-device">
+              <div class="mobile-device-header">
+                <span>StayFlow</span>
+                <strong id="mobileWorkerName">Maria</strong>
+              </div>
+              <div class="mobile-work-summary" id="mobileWorkSummary"></div>
+              <div class="mobile-work-list" id="mobileWorkList"></div>
+            </div>
+            <aside class="mobile-work-notes">
+              <p class="eyebrow">Uso real</p>
+              <h3>Para limpieza, recepción y mantenimiento</h3>
+              <p>Esta vista está pensada para abrirse desde el teléfono: tareas claras, botones grandes, checklist y evidencias sin entrar al panel completo.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="issue-section view-section" id="incidencias" data-view="incidencias" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Incidencias</p>
+              <h2>Riesgos que no pueden perderse</h2>
+            </div>
+          </div>
+          <div class="issue-layout">
+            <div class="issue-list" id="issueList"></div>
+            <aside class="issue-detail" id="issueDetail" aria-label="Detalle de incidencia"></aside>
+          </div>
+        </section>
+
+        <section class="settings-section view-section" id="configuracion" data-view="configuracion" hidden>
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">Configuración</p>
+              <h2>Ajustes base de StayFlow</h2>
+            </div>
+            <button class="primary-button" type="button" id="saveSettings">Guardar configuración</button>
+          </div>
+
+          <div class="settings-layout">
+            <form class="settings-panel" id="companySettings">
+              <div>
+                <p class="eyebrow">Empresa</p>
+                <h3>Datos operativos</h3>
+              </div>
+              <label>
+                Nombre comercial
+                <input id="companyName" type="text" />
+              </label>
+              <label>
+                Ciudad base
+                <input id="companyCity" type="text" />
+              </label>
+              <label>
+                Email operativo
+                <input id="companyEmail" type="email" />
+              </label>
+            </form>
+
+            <div class="settings-panel">
+              <div>
+                <p class="eyebrow">Zonas</p>
+                <h3>Áreas de trabajo</h3>
+              </div>
+              <div class="settings-list" id="zoneSettings"></div>
+              <div class="settings-add">
+                <input id="newZoneInput" type="text" placeholder="Nueva zona" />
+                <button class="ghost-button" type="button" id="addZone">Añadir</button>
+              </div>
+            </div>
+
+            <div class="settings-panel">
+              <div>
+                <p class="eyebrow">Equipo</p>
+                <h3>Responsables</h3>
+              </div>
+              <div class="settings-list" id="teamSettings"></div>
+              <div class="settings-add">
+                <input id="newMemberInput" type="text" placeholder="Nuevo responsable" />
+                <button class="ghost-button" type="button" id="addMember">Añadir</button>
+              </div>
+            </div>
+
+            <div class="settings-panel">
+              <div>
+                <p class="eyebrow">Checklist</p>
+                <h3>Limpieza base</h3>
+              </div>
+              <div class="settings-list" id="baseChecklistSettings"></div>
+              <div class="settings-add">
+                <input id="newChecklistInput" type="text" placeholder="Nuevo punto de checklist" />
+                <button class="ghost-button" type="button" id="addChecklistItem">Añadir</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-label="Mensajes de confirmacion"></div>
+
+    <aside class="guided-demo" id="guidedDemo" hidden aria-label="Demo guiada">
+      <div class="guided-header">
+        <div>
+          <p class="eyebrow">Demo guiada</p>
+          <h2 id="guidedTitle">StayFlow en modo demo</h2>
+        </div>
+        <button class="close-button" type="button" id="closeGuidedDemo" aria-label="Cerrar">×</button>
+      </div>
+      <p id="guidedText"></p>
+      <div class="guided-progress">
+        <span id="guidedProgressBar"></span>
+      </div>
+      <div class="guided-footer">
+        <button class="ghost-button" type="button" id="prevGuidedStep">Anterior</button>
+        <span id="guidedStepCount">1/5</span>
+        <button class="primary-button" type="button" id="nextGuidedStep">Siguiente</button>
+      </div>
+    </aside>
+
+    <div class="modal-backdrop" id="taskModal" hidden>
+      <form class="modal" id="taskForm">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Crear</p>
+            <h2>Nueva tarea operativa</h2>
+          </div>
+          <button class="close-button" type="button" id="closeTaskModal" aria-label="Cerrar">×</button>
+        </div>
+
+        <label>
+          Tipo
+          <select name="type">
+            <option value="Tarea">Tarea</option>
+            <option value="Incidencia">Incidencia</option>
+            <option value="Limpieza">Limpieza</option>
+            <option value="Recepción">Recepción</option>
+          </select>
+        </label>
+
+        <label>
+          Título
+          <input name="title" type="text" value="Revisar vivienda antes del check-in" required />
+        </label>
+
+        <label>
+          Vivienda
+          <select name="property" id="taskPropertySelect"></select>
+        </label>
+
+        <div class="form-grid">
+          <label>
+            Responsable
+            <select name="owner">
+              <option>Maria</option>
+              <option>Lucía</option>
+              <option>Nora</option>
+              <option>Rafa</option>
+              <option>Sin asignar</option>
+            </select>
+          </label>
+          <label>
+            Prioridad
+            <select name="priority">
+              <option value="media">Media</option>
+              <option value="alta">Alta</option>
+              <option value="baja">Baja</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Nota
+          <textarea name="note" rows="3">Comprobar estado, hacer fotos y marcar como lista si está todo correcto.</textarea>
+        </label>
+
+        <div class="modal-actions">
+          <button class="ghost-button" type="button" id="cancelTaskModal">Cancelar</button>
+          <button class="primary-button" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

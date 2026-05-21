@@ -1,6 +1,6 @@
 # StayFlow - Documento Comercial
 
-Ultima actualizacion: 2026-05-14
+Ultima actualizacion: 2026-05-21
 
 ## Regla de mantenimiento
 
@@ -57,6 +57,18 @@ Mercado inicial natural:
 - Empresas de gestion de viviendas turisticas.
 - Gestores que necesitan controlar mejor el dia a dia antes de invertir en herramientas complejas.
 
+## Caso demo para presentar
+
+La demo usa como referencia ficticia a CostaSur Gestion Vacacional, una gestora local de Malaga con 14 viviendas.
+
+Escenario:
+
+- Zonas: Malaga centro, Soho, Malagueta, Huelin, Pedregalejo y Teatinos.
+- Equipo: coordinacion, limpieza, recepcion y mantenimiento.
+- Problema principal: check-ins con poco margen, confirmacion tardia de limpiezas, llaves e incidencias.
+- Muestra visible: 6 viviendas representativas dentro de una cartera mayor.
+- Piloto recomendado: 7 dias con datos ficticios o controlados antes de usar datos reales.
+
 ## Propuesta de valor
 
 StayFlow ayuda a que una empresa de alquiler vacacional pueda responder rapidamente a estas preguntas:
@@ -74,6 +86,18 @@ StayFlow ayuda a que una empresa de alquiler vacacional pueda responder rapidame
 ### Panel de hoy
 
 Vista inicial con resumen de entradas, salidas, limpiezas y riesgos.
+
+### Presentacion
+
+Vista comercial para ensenar StayFlow en una llamada con clientes. Resume:
+
+- Cliente inicial recomendado.
+- Problema operativo.
+- Propuesta de valor.
+- Diferencia frente a PMS completos.
+- Pricing provisional.
+- Preguntas de discovery.
+- Aviso de demo sin datos reales.
 
 ### Filtros globales
 
@@ -231,11 +255,33 @@ La demo actual permite:
 - Conservar cambios durante una demo local y restaurar datos iniciales cuando haga falta.
 - Presentar el producto con un recorrido guiado y guion de video demo.
 - Configurar datos base de empresa, equipo, zonas y checklist de limpieza.
+- Abrir una landing comercial estatica desde la demo para presentar el problema, la diferenciacion y los planes provisionales.
 
 ## Pendientes comerciales
 
-- Definir pricing inicial.
-- Definir paquetes Starter / Pro / Operaciones.
-- Preparar landing comercial.
+- Validar pricing inicial con gestores reales.
+- Validar paquetes Starter / Pro / Operaciones.
+- Convertir la landing estatica actual en una landing publica cuando exista dominio y datos legales.
 - Revisar y ensayar guion de demo de 3 minutos.
 - Validar con 3 a 5 gestores reales de Malaga.
+
+## Landing comercial
+
+Archivo principal actual: `index.html`.
+
+La demo interactiva vive en `demo.html`.
+
+Uso recomendado:
+
+- Enviar como primera vista antes de abrir la demo.
+- Explicar problema y diferenciacion en una llamada.
+- Servir como base para una futura web publica.
+- Reutilizar textos para una propuesta PDF.
+
+## Pricing provisional para validacion
+
+Estos precios sirven para medir reaccion, no como tarifa definitiva:
+
+- Starter: 49 EUR/mes para hasta 10 viviendas.
+- Pro: 89 EUR/mes para hasta 25 viviendas.
+- Operaciones: precio a medida para equipos con mas volumen, integraciones o necesidades especificas.

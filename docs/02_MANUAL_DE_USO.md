@@ -1,6 +1,6 @@
 # StayFlow - Manual De Uso
 
-Ultima actualizacion: 2026-05-14
+Ultima actualizacion: 2026-05-21
 
 ## Regla de mantenimiento
 
@@ -55,6 +55,7 @@ StayFlow funciona por vistas. La barra lateral permite cambiar de modulo y ver s
 Vistas actuales:
 
 - Hoy.
+- Presentacion.
 - Agenda.
 - Propiedades.
 - Tareas.
@@ -62,6 +63,11 @@ Vistas actuales:
 - Movil.
 - Incidencias.
 - Configuracion.
+
+Paginas relacionadas:
+
+- `index.html`: web comercial estatica para presentar StayFlow fuera del panel operativo.
+- `demo.html`: demo interactiva publica con datos ficticios.
 
 ### Panel de hoy
 
@@ -75,6 +81,62 @@ Muestra el resumen rapido del dia:
 Sirve para que el coordinador sepa donde mirar primero.
 
 En la vista Hoy tambien se muestran los filtros globales, lo importante del dia y una vista movil de ejemplo.
+
+### Presentacion
+
+La vista Presentacion sirve para abrir una llamada con un cliente potencial antes de entrar en la demo operativa.
+
+Incluye:
+
+- Resumen del problema que resuelve StayFlow.
+- Cliente inicial recomendado.
+- Caso demo CostaSur Gestion Vacacional.
+- Propuesta de valor.
+- Diferencia frente a un PMS completo.
+- Pricing provisional.
+- Preguntas de discovery.
+- Aviso de que la demo todavia no debe usarse con datos reales de huespedes.
+
+Uso recomendado:
+
+1. Abrir Perfil Coordinador.
+2. Entrar en Presentacion.
+3. Explicar el problema en menos de un minuto.
+4. Pasar a Demo guiada para mostrar el producto funcionando.
+5. Volver a Presentacion al final para hablar de precio, prueba piloto y siguientes pasos.
+
+### Web comercial
+
+La demo incluye un enlace "Web comercial" en la barra superior.
+
+Esa pagina es `index.html` y resume StayFlow para un cliente antes de entrar en la aplicacion:
+
+- Problema operativo.
+- Diferenciacion frente a WhatsApp, hojas, PMS y apps genericas.
+- Perfil de cliente ideal.
+- Pricing provisional.
+- Acceso a la demo interactiva.
+
+Debe usarse como pagina de presentacion o base para una futura landing publica.
+
+### Demo publica
+
+La demo interactiva publica esta en `demo.html`.
+
+Incluye un aviso visible indicando que los datos son ficticios y que no se deben introducir datos reales de huespedes, propietarios o viviendas.
+
+### Caso demo Malaga
+
+La demo se presenta como si CostaSur Gestion Vacacional estuviera probando StayFlow.
+
+Datos narrativos:
+
+- 14 viviendas gestionadas.
+- 6 viviendas visibles como muestra operativa.
+- Equipo con limpieza, recepcion, mantenimiento y coordinacion.
+- Problema principal: evitar que una vivienda llegue al check-in sin limpieza, llaves, fotos o incidencia resuelta.
+
+Este caso no representa datos reales. Sirve para explicar el producto de forma concreta sin usar informacion de clientes.
 
 ### Lo importante de hoy
 
