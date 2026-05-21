@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Uso — StayFlow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #167c5b;
+    --primary-light: #1d9a72;
+    --primary-ultra: #eaf7f2;
+    --bg: #f7faf8;
+    --text: #17211c;
+    --text-muted: #62706b;
+    --border: #dfe7e3;
+    --card: #ffffff;
+    --code-bg: #edf7f3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .header { background: var(--primary); color: white; padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(22,124,91,.3); }
+  .header-left { display: flex; align-items: center; gap: 1rem; }
+  .header-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.25rem; }
+  .header-subtitle { font-size: .875rem; opacity: .8; }
+  .back-btn { background: rgba(255,255,255,.15); color: white; border: 1px solid rgba(255,255,255,.3); padding: .4rem 1rem; border-radius: 6px; text-decoration: none; font-size: .85rem; }
+  .back-btn:hover { background: rgba(255,255,255,.25); }
+  .layout { display: flex; min-height: calc(100vh - 64px); }
+  .sidebar { width: 260px; flex-shrink: 0; background: var(--card); border-right: 1px solid var(--border); padding: 1.5rem 0; position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; }
+  .sidebar-title { font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); padding: 0 1.25rem .75rem; font-weight: 600; }
+  .sidebar a { display: block; padding: .45rem 1.25rem; color: var(--text-muted); text-decoration: none; font-size: .875rem; border-left: 3px solid transparent; }
+  .sidebar a:hover { color: var(--primary); background: var(--primary-ultra); border-left-color: var(--primary); }
+  .main { flex: 1; padding: 3rem 4rem; max-width: 860px; }
+  .doc-hero { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border-radius: 16px; padding: 2.5rem; margin-bottom: 3rem; }
+  .doc-hero h1 { font-family: 'Sora', sans-serif; font-size: 2rem; margin-bottom: .5rem; }
+  .doc-hero p { opacity: .85; }
+  .doc-meta { display: flex; gap: 1.5rem; margin-top: 1.25rem; font-size: .8rem; opacity: .75; }
+  .section { margin-bottom: 3rem; scroll-margin-top: 80px; }
+  .section h2 { font-family: 'Sora', sans-serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--border); }
+  .section h3 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 .5rem; }
+  .section p { margin-bottom: .75rem; color: #2a3d35; }
+  .section ul, .section ol { padding-left: 1.5rem; margin-bottom: 1rem; color: #2a3d35; }
+  .section li { margin-bottom: .3rem; }
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 1rem 0; }
+  .steps li { counter-increment: step; display: flex; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--border); }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before { content: counter(step); background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+  .card h4 { font-size: .9rem; font-weight: 600; color: var(--primary); margin-bottom: .5rem; }
+  .card ul, .card p { font-size: .85rem; color: var(--text-muted); }
+  .card ul { padding-left: 1.25rem; }
+  .card li { margin-bottom: .2rem; }
+  code { background: var(--code-bg); color: var(--primary); padding: .15rem .4rem; border-radius: 4px; font-family: monospace; font-size: .875em; border: 1px solid var(--border); }
+  .info-box { background: var(--primary-ultra); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: .9rem; }
+  .status-grid { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+  .status { display: inline-flex; align-items: center; padding: .3rem .75rem; border-radius: 20px; font-size: .8rem; font-weight: 500; }
+  .s-libre { background: #d1fae5; color: #065f46; }
+  .s-ocup { background: #fee2e2; color: #991b1b; }
+  .s-entrada { background: #fef3c7; color: #92400e; }
+  .s-salida { background: #e0e7ff; color: #3730a3; }
+  .s-limpieza { background: #dbeafe; color: #1e40af; }
+  .s-lista { background: #dcfce7; color: #166534; }
+  .s-incidencia { background: #f3e8ff; color: #6b21a8; }
+  @media (max-width: 900px) { .sidebar { display: none; } .main { padding: 2rem 1.5rem; } }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-left">
+    <span class="header-logo">StayFlow</span>
+    <span class="header-subtitle">Manual de uso</span>
+  </div>
+  <a href="index.html" class="back-btn">← Volver a la landing</a>
+</header>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-title">Contenido</div>
+    <a href="#que-es">¿Qué es StayFlow?</a>
+    <a href="#perfiles">Perfiles</a>
+    <a href="#estados">Estados de vivienda</a>
+    <a href="#vistas">Vistas y secciones</a>
+    <a href="#hoy">Panel de hoy</a>
+    <a href="#propiedades">Propiedades</a>
+    <a href="#tareas">Tareas</a>
+    <a href="#limpieza">Limpiezas</a>
+    <a href="#incidencias">Incidencias</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#configuracion">Configuración</a>
+    <a href="#demo">Demo guiada</a>
+    <a href="#restaurar">Restaurar demo</a>
+  </nav>
+  <main class="main">
+    <div class="doc-hero">
+      <h1>Manual de Uso — StayFlow</h1>
+      <p>Coordinación operativa de viviendas turísticas: entradas, salidas, limpiezas, tareas e incidencias.</p>
+      <div class="doc-meta">
+        <span>📅 Última actualización: 21 de mayo 2026</span>
+        <span>🏠 Para gestores de viviendas turísticas</span>
+      </div>
+    </div>
+
+    <section class="section" id="que-es">
+      <h2>¿Qué es StayFlow?</h2>
+      <p>StayFlow es una herramienta para coordinar la operativa diaria de viviendas turísticas: entradas, salidas, limpiezas, responsables, tareas e incidencias. Evita que una vivienda llegue al check-in sin limpieza, llaves, fotos o incidencia resuelta.</p>
+    </section>
+
+    <section class="section" id="perfiles">
+      <h2>Perfiles</h2>
+      <div class="card-grid">
+        <div class="card"><h4>🎯 Coordinador</h4><p>Ve todo el panel, asigna tareas, cambia estados y desbloquea problemas.</p></div>
+        <div class="card"><h4>🧹 Limpieza</h4><p>Ve sus tareas del día, inicia y completa limpiezas, avisa si hay problemas.</p></div>
+        <div class="card"><h4>🔑 Recepción</h4><p>Ve entradas, solicitudes especiales y tareas de check-in.</p></div>
+        <div class="card"><h4>🔧 Mantenimiento</h4><p>Ve incidencias asignadas y marca avances o resolución.</p></div>
+        <div class="card"><h4>🏢 Propietario</h4><p>Vista limitada: estado de viviendas y resumen general.</p></div>
+      </div>
+      <div class="info-box">El selector de perfil en la parte superior adapta la demo a cada rol: cambia el título, el foco de la pantalla, la navegación y los filtros.</div>
+    </section>
+
+    <section class="section" id="estados">
+      <h2>Estados de vivienda</h2>
+      <div class="status-grid">
+        <span class="status s-libre">Libre</span>
+        <span class="status s-ocup">Ocupada</span>
+        <span class="status s-entrada">Por Entrar</span>
+        <span class="status s-salida">Por Salir</span>
+        <span class="status s-limpieza">En Limpieza</span>
+        <span class="status s-lista">Lista</span>
+        <span class="status s-incidencia">Incidencia</span>
+      </div>
+    </section>
+
+    <section class="section" id="vistas">
+      <h2>Vistas y secciones</h2>
+      <div class="card-grid">
+        <div class="card"><h4>Hoy</h4><p>Resumen rápido del día: entradas, salidas, limpiezas y riesgos.</p></div>
+        <div class="card"><h4>Presentación</h4><p>Vista de venta para abrir una llamada con un cliente potencial.</p></div>
+        <div class="card"><h4>Agenda</h4><p>Eventos del día ordenados por horas.</p></div>
+        <div class="card"><h4>Propiedades</h4><p>Tarjetas visuales de cada vivienda con su estado y próxima acción.</p></div>
+        <div class="card"><h4>Tareas</h4><p>Tablero Kanban: Pendiente, En curso, Bloqueado, Completado.</p></div>
+        <div class="card"><h4>Equipo</h4><p>Responsables del día con sus tareas asignadas.</p></div>
+        <div class="card"><h4>Móvil</h4><p>Vista optimizada para trabajar desde el teléfono.</p></div>
+        <div class="card"><h4>Incidencias</h4><p>Problemas o riesgos que requieren seguimiento.</p></div>
+        <div class="card"><h4>Configuración</h4><p>Datos base: empresa, zonas, equipo y checklist.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="hoy">
+      <h2>Panel de hoy</h2>
+      <p>Muestra el resumen rápido del día para que el coordinador sepa dónde mirar primero: entradas previstas, salidas, limpiezas pendientes y riesgos activos.</p>
+      <p>También incluye los filtros globales (por estado, responsable o zona) y la lista de lo importante del día con los eventos prioritarios.</p>
+    </section>
+
+    <section class="section" id="propiedades">
+      <h2>Propiedades</h2>
+      <p>Tarjetas visuales de cada vivienda. Cada tarjeta muestra: nombre, zona, estado, próxima acción y responsable.</p>
+      <p>Acciones disponibles: <code>Abrir</code> (ver detalle), <code>Lista</code> (marcar vivienda preparada).</p>
+
+      <h3>Detalle de vivienda</h3>
+      <p>Permite revisar y modificar: estado, zona, dirección, capacidad, código de llave, propietario, responsable habitual, check-in y check-out.</p>
+
+      <h3>Vista propietario</h3>
+      <p>En perfil Propietario, la vista de propiedades muestra un reporte por propietario con número de viviendas, estado de cada una y próximos movimientos. Es de solo lectura.</p>
+    </section>
+
+    <section class="section" id="tareas">
+      <h2>Tareas</h2>
+      <p>El tablero tiene cuatro columnas: Pendiente, En curso, Bloqueado, Completado.</p>
+
+      <h3>Crear una tarea</h3>
+      <ol class="steps">
+        <li>Pulsar <code>Nueva tarea</code></li>
+        <li>Elegir tipo: Tarea, Incidencia, Limpieza o Recepción</li>
+        <li>Escribir el título y elegir la vivienda</li>
+        <li>Elegir responsable y prioridad</li>
+        <li>Escribir nota si hace falta</li>
+        <li>Pulsar <code>Guardar</code></li>
+      </ol>
+
+      <h3>Acciones sobre tareas</h3>
+      <ul>
+        <li><code>Iniciar</code> — mueve de Pendiente a En curso</li>
+        <li><code>Completar</code> — mueve de En curso a Completado</li>
+        <li><code>Bloquear</code> — mueve a Bloqueado y crea incidencia si corresponde</li>
+        <li><code>Reactivar</code> — mueve de Bloqueado a En curso</li>
+        <li><code>Reabrir</code> — mueve de Completado a Pendiente</li>
+      </ul>
+
+      <h3>Usar filtros</h3>
+      <ol class="steps">
+        <li>Ir a la barra Filtros</li>
+        <li>Elegir Estado, Responsable o Zona</li>
+        <li>Revisar el contador de viviendas visibles</li>
+        <li>Pulsar <code>Limpiar</code> para volver a la vista completa</li>
+      </ol>
+    </section>
+
+    <section class="section" id="limpieza">
+      <h2>Gestión de limpiezas</h2>
+      <ol class="steps">
+        <li>Ir a Tareas o Agenda del día</li>
+        <li>Buscar la tarea de limpieza</li>
+        <li>Pulsar <code>Iniciar</code> — la vivienda pasa a En Limpieza</li>
+        <li>Marcar los puntos del checklist</li>
+        <li>Añadir fotos finales si corresponde</li>
+        <li>Pulsar <code>Completar</code></li>
+        <li>Si el checklist está completo, la vivienda pasa a Lista</li>
+      </ol>
+      <div class="info-box">Si el checklist está incompleto, StayFlow muestra un aviso antes de completar la limpieza.</div>
+    </section>
+
+    <section class="section" id="incidencias">
+      <h2>Incidencias</h2>
+      <p>Registra problemas o riesgos que requieren seguimiento. Cada incidencia muestra: título, vivienda, detalle, estado, prioridad, responsable y acción sugerida.</p>
+
+      <h3>Estados de incidencia</h3>
+      <div class="status-grid">
+        <span class="status s-entrada">Abierta</span>
+        <span class="status s-limpieza">En curso</span>
+        <span class="status s-lista">Resuelta</span>
+      </div>
+
+      <h3>Abrir incidencia</h3>
+      <p>Desde una vivienda: <code>Abrir incidencia</code>. Desde la agenda: <code>Marcar riesgo</code>. La vivienda pasa a estado Incidencia.</p>
+
+      <h3>Resolver una incidencia</h3>
+      <ol class="steps">
+        <li>Ir a Incidencias</li>
+        <li>Abrir la incidencia</li>
+        <li>Pulsar <code>En curso</code> cuando alguien la está gestionando</li>
+        <li>Añadir evidencia si hace falta</li>
+        <li>Pulsar <code>Resolver</code> cuando el problema esté cerrado</li>
+        <li>Si la vivienda estaba en Incidencia, pasa a Lista automáticamente</li>
+      </ol>
+    </section>
+
+    <section class="section" id="equipo">
+      <h2>Equipo</h2>
+      <p>Vista de responsables del día. Cada responsable muestra: nombre, rol, zona, foco del día y tareas asignadas (pendientes, en curso, bloqueadas).</p>
+      <p>Permite gestionar las tareas directamente desde el panel del responsable: iniciar, completar, bloquear, reactivar o reabrir.</p>
+    </section>
+
+    <section class="section" id="configuracion">
+      <h2>Configuración</h2>
+      <div class="card-grid">
+        <div class="card"><h4>Empresa</h4><ul><li>Nombre comercial</li><li>Ciudad base</li><li>Email operativo</li></ul></div>
+        <div class="card"><h4>Zonas</h4><ul><li>Añadir zonas de trabajo</li><li>Asignar viviendas por zona</li></ul></div>
+        <div class="card"><h4>Equipo</h4><ul><li>Añadir responsables</li><li>Gestionar roles</li></ul></div>
+        <div class="card"><h4>Checklist</h4><ul><li>Puntos base de limpieza</li><li>Personalizar por tipo de vivienda</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <h2>Demo guiada</h2>
+      <p>El botón <code>Demo guiada</code> abre un recorrido interactivo de 6 pasos que cambia automáticamente el perfil y la vista para mostrar el producto como lo usaría cada rol:</p>
+      <ol>
+        <li>Controlar el día</li>
+        <li>Ordenar entradas y salidas</li>
+        <li>Ejecutar desde el móvil</li>
+        <li>Cerrar limpieza con control</li>
+        <li>Resolver riesgos</li>
+        <li>Informar al propietario</li>
+      </ol>
+    </section>
+
+    <section class="section" id="restaurar">
+      <h2>Restaurar demo</h2>
+      <p>El botón <code>Restaurar demo</code> devuelve todos los datos al estado inicial. Útil para presentar de cero o probar desde el principio.</p>
+      <div class="info-box">La demo guarda cambios en el navegador: estados de viviendas, tareas, checklists, evidencias e incidencias se conservan al recargar.</div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
